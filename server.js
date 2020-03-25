@@ -14,6 +14,15 @@ app.use(session({
     saveUninitialized:false
 }))
 
+const sessionController = require('./controllers/session.js');
+app.use('/session', sessionController)
+
+const wonderController = require('./controllers/wonders.js');
+app.use('/wonder', wonderController);
+
+const usersController = require('./controllers/users.js');
+app.use('/users', usersController);
+
 
 mongoose.connect(PROJECT3_DB ,  { useNewUrlParser: true});
 
