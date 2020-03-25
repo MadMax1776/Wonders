@@ -46,10 +46,7 @@ Thumbs.db
 # Node/npm #
 ##############
 node_modules
-<<<<<<< HEAD
-=======
-
->>>>>>> f002abca19176e6c805d6cc74255300ab6185ca0
+node_modules/
 .env
 
 # Sass #
@@ -86,7 +83,7 @@ config/master.key
 
 # dotenv
 # TODO Comment out this rule if environment variables can be committed
-.env
+
 
 ## Environment normalization:
 /.bundle
