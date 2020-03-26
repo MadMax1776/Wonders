@@ -27,4 +27,12 @@ router.get('/', (request, response) => {
 	response.json(request.session.user);
 });
 
+router.delete('/', (req, res) => {
+    req.session.destroy(() => {
+        res.json({
+            destroyed:true
+        });
+    })
+});
+
 module.exports = router;
