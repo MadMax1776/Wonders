@@ -15,11 +15,6 @@ const dbupdateobject = {
 
 app.use(express.json());
 app.use(express.static('public'))
-app.use(session({
-    secret:'feedmeseymour',
-    resave:false,
-    saveUninitialized:false
-}))
 
 const sessionController = require('./controllers/session.js');
 app.use('/session', sessionController)
@@ -30,10 +25,13 @@ app.use('/wonder', wonderController);
 const usersController = require('./controllers/users.js');
 app.use('/users', usersController);
 
-
-
 // Connect to Mongo
-mongoose.connect(process.env.PROJECT3_DB, dbupdateobject);
+mongoose.connect('mongodb://localhost:27017/meancrud',
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }
+);
 // Connection Error/Success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected!')
@@ -43,7 +41,6 @@ db.on('open', () => {
     console.log('Connection made!');
 });
 
-
-app.listen(process.env.PORT, () => {
+app.listen(3000, () => {
   console.log(`Listening on port ${process.env.PORT}`);
 })
