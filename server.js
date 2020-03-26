@@ -5,6 +5,13 @@ const session = require('express-session');
 const PROJECT3_DB = process.env.PROJECT3_DB
 const PORT = process.env.PORT || 3003;
 const db = mongoose.connection;
+require('dotenv').config();
+
+const dbupdateobject = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+};
 
 app.use(express.json());
 app.use(express.static('public'))
@@ -24,10 +31,19 @@ const usersController = require('./controllers/users.js');
 app.use('/users', usersController);
 
 
-mongoose.connect(PROJECT3_DB ,  { useNewUrlParser: true});
 
+// Connect to Mongo
+mongoose.connect(process.env.PROJECT3_DB, dbupdateobject);
+// Connection Error/Success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
-db.on('connected', () => console.log('mongo connected: ', PROJECT3_DB));
+db.on('connected', () => console.log('mongo connected!')
+);
 db.on('disconnected', () => console.log('mongo disconnected'));
+db.on('open', () => {
+    console.log('Connection made!');
+});
 
-app.listen(PORT, () => console.log( 'Listening on port:', PORT));
+
+app.listen(process.env.PORT, () => {
+  console.log(`Listening on port ${process.env.PORT}`);
+})
