@@ -30,23 +30,28 @@
   <h1>World Wonders</h1>
   {{2+2}}
 
-  <h3>Sign Up</h3>
-  <form>
-    Username: <input type="text" /><br/>
-    Password: <input type="password" /><br/>
-    <input type="submit"value="Sign Up">
-  </form><br>
+  <section ng-if="ctrl.loggedInUser === false">
+
+          <h2>Sign Up</h2>
+          <form ng-submit="ctrl.signup()">
+             Username: <input type="text" ng-model="ctrl.signupUsername"/><br/>
+             Password: <input type="password" ng-model="ctrl.signupPassword"/><br/>
+             <input type="submit" value="Sign Up">
+          </form>
+
+          <h2>Log In</h2>
+           <form ng-submit="ctrl.login()">
+               Username: <input type="text" ng-model="ctrl.loginUsername"/><br/>
+               Password: <input type="password" ng-model="ctrl.loginPassword"/><br/>
+               <input type="submit" value="Log In">
+           </form>
+
+        </section>
 
 
-    <h3>Log In</h3>
-    <form>
-      Username: <input type="text">
-      Password: <input type="password">
-      <input type="submit"value="Login">
-    </form><br>
-
-    <section>
-      <h2>Welcome!!</h2>
+    <section ng-if="ctrl.loggedInUser !== false">
+      <h2>Welcome {{ctrl.loggedInUser.username}}</h2>
+      <button ng-click="ctrl.logout()">Log Out</button>
 
       <div>
         <form ng-submit="ctrl.createWonder()">
@@ -59,12 +64,8 @@
      <h3>Your list of Wonders</h3>
       <div>
           <ul>
-            <li ng-repeat="wwe in ctrl.wwe">
-              {{wwe.name}}
-              {{wwe.description}}
-              {{wwe.country}}
-              {{wwe.latitude}}
-              {{wwe.longitude}}
+            <li ng-repeat="wonder in ctrl.wwe">
+
             </li>
           </ul>
       </div>
