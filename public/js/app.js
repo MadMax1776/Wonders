@@ -108,10 +108,10 @@ $http({
     controller.loggedInUser = false;
     controller.loginUsername = null;
     controller.loginPassword = null;
-    controller.signupPassword =null;
+    // controller.signupPassword =null;
 
 })
-}
+};
 
 $http({
   method:'GET',
