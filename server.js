@@ -19,7 +19,7 @@ app.use(session({
     secret:'feedmeseymour',
     resave:false,
     saveUninitialized:false
-}))
+}));
 
 const sessionController = require('./controllers/session.js');
 app.use('/session', sessionController)
