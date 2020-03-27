@@ -3,24 +3,24 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users.js');
 const router = express.Router();
 
-router.post('/', (request, response) => {
-	User.findOne({username:request.body.username}, (error, usernameFound) => {
-		if(usernameFound === null) {
-			response.json({
-				message: 'Invalid username!'
-			})
-		} else {
-			const doesPasswordMatch = bcrypt.compareSync(request.body.password, passwordFound.password)
-			if (doesPasswordMatch) {
-				response.session.user = usernameFound;
-				response.json(usernameFound);
-			} else {
-				response.json({
-					message: 'Invalid Password!'
-				})
-			}
-		}
-	});
+router.post('/', (req, res) => {
+    User.findOne({username:req.body.username}, (error, foundUser) => {
+      if(foundUser === null){
+        res.json({
+               message:'user not found',
+           });
+       } else {
+           const doesPasswordMatch = bcrypt.compareSync(req.body.password, foundUser.password);
+           if(doesPasswordMatch){
+             req.session.user = foundUser;
+               res.json(foundUser)
+           } else {
+               res.json({
+                   message:'bad pwd'
+               });
+           }
+       }
+   });
 });
 
 router.get('/', (request, response) => {
