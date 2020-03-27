@@ -1,9 +1,23 @@
 #map {
+    display: inline-block;
     height: 300px;
     width: 300px;
 }
 
 #streetview-map {
+    display: inline-block;
     height: 300px;
     width: 300px;
+}
+
+#maps-div {
+    position: absolute;
+    left: -1000px;
+    height:100%;
+    width:100%;
+    transition: left 2s; /* A friend gave me this idea by asking me, "Did you learn how to animate in CSS? The answer was 'yes'!" - Stephen */
+}
+
+form {
+    width: 25%;
 }
