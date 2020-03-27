@@ -30,10 +30,16 @@ app.use('/wonder', wonderController);
 const usersController = require('./controllers/users.js');
 app.use('/users', usersController);
 
-
-
 // Connect to Mongo
 mongoose.connect(process.env.PROJECT3_DB, dbupdateobject);
+
+//this is for solo testing and will be removed at a later date
+//mongoose.connect('mongodb://localhost:27017/meancrud',
+//    {
+//        useNewUrlParser: true,
+//        useUnifiedTopology: true
+//    }
+//);
 // Connection Error/Success
 db.on('error', (err) => console.log(err.message + ' is Mongod not running?'));
 db.on('connected', () => console.log('mongo connected!')
@@ -43,7 +49,6 @@ db.on('open', () => {
     console.log('Connection made!');
 });
 
-
-app.listen(process.env.PORT, () => {
+app.listen(3000, () => {
   console.log(`Listening on port ${process.env.PORT}`);
 })

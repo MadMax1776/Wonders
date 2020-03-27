@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     Wonders.find({}, (error, foundWonder) => {
         res.json(foundWonder);
     })
-})
+});
 
 router.post('/', (req, res) => {
     Wonders.create(req.body, (err, createdWonder) => {
@@ -24,6 +24,6 @@ router.put('/:id', (req, res) => {
     Wonders.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedWonder) => {
         res.json(updatedWonder);
     })
-})
+});
 
 module.exports = router;

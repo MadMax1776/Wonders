@@ -1,28 +1,34 @@
 const app = angular.module('WonderApp', []);
 
+app.controller('MyController',['$http', function($http){
+    this.name = null;
+    this.description = null;
+    this.latitude = null;
+    this.longitude = null;
+    this.indexOfWonder = null;
 
- app.controller('MyController',['$http', function($http){
-  this.name = null;
-  this.loggedInUser = false;
-  ////changing between true and false determines what will be on the page.
-  this.indexOfEditFormToShow = null;
+    this.wonders = [];
+    this.wonder = '';
 
-const controller = this;
+    this.loggedInUser = false;
+    ////changing between true and false determines what will be on the page.
 
-  this.signup = function(){
-    $http({
-      url: '/users',
-      method: 'POST',
-      data: {
-        username: this.signupUsername,
-        password: this.signupPassword
-      }
-    }).then(function(response){
-     controller.loggedInUser = response.data;
-   })
-  }
+    const controller = this;
 
-  this.login = function(){
+    this.signup = function(){
+        $http({
+            url: '/users',
+            method: 'POST',
+            data: {
+                username: this.signupUsername,
+                password: this.signupPassword
+            }
+        }).then(function(response){
+            controller.loggedInUser = response.data;
+        })
+    };
+
+    this.login = function() {
         $http({
             url:'/session',
             method:'POST',
@@ -33,72 +39,66 @@ const controller = this;
         }).then(function(response){
             if(response.data.username){
                 controller.loggedInUser = response.data;
-            } else {
-                controller.loginUsername = null;
-                controller.loginPassword = null;
-                controller.signupUsername = null;
+                } else {
+                    controller.loginUsername = null;
+                    controller.loginPassword = null;
+                    controller.signupUsername = null;
 
                 ////these two lines clear out the form if it's wrong
-            }
+                 }
         })
-      }
+    };
 
-  this.createWonder = function() {
-      $http({
-          method: 'POST',
-          url:'/wonder',
-          data: {
-            name: this.name,
-          	description: this.description,
-          	country: this.country,
-          	latitude: this.latitude,
-          	longitude: this.longitude
-          }
-      }).then(
-          function(response) {
-              controller.getWonder();
-          },
-          function(error) {
-              console.log(error);
-          }
-      )
-  };
+    this.moveMap = function(wonder) {
+        map.panTo({lat: wonder.latitude, lng: wonder.longitude});
+        panorama.setPosition({lat: wonder.latitude, lng: wonder.longitude})
+    };
 
-  this.getWonder = function(){
-    $http({
-      method: 'GET',
-      url: '/wonder'
-    }).then(
-      function(response){
-         console.log(response.data);
-        // console.log(this);
-        // console.log(controller);
-        controller.wwe = response.data;
+    this.createWonder = function() {
+        $http({
+            method: 'POST',
+            data: this.createForm,
+            url:'/wonder/'
+        }).then(
+            (response) => {
+                console.log(response.data);
+                controller.wonders.push(response.data);
+                controller.createForm.name ='';
+            },  (error) => console.log(error)
+        )};
 
-      },
-      function (error) {
+    this.getWonder = function() {
+        $http({
+            method: 'GET',
+            url: '/wonder/'
+        }).then(
+            function(response){
+                console.log(response.data);
+                controller.wonders = response.data;
+            },
+                function (error) {
+                    console.log(error);
+                }
+            )
+    };
+    this.getWonder();
 
-      }
-    )
-  };
-
-  this.editWonder = function(wonder){
-    $http({
-        method:'PUT',
-        url: '/wonder/' + wonder._id,
-        data: {
-            title: this.updatedTitle || wonder.title
-        }
-}).then(
-    function(response){
-        controller.updatedTitle = null;
-        controller.getWonder();
-    },
-function(error){
-    console.log(error);
-}
-);
-};
+    this.editWonder = function(wonder){
+        $http({
+            method:'PUT',
+            url: '/wonder/' + wonder._id,
+            data: {
+                title: this.updatedTitle || wonder.title
+            }
+        }).then(
+            function(response){
+                controller.updatedTitle = null;
+                controller.getWonder();
+        },
+            function(error){
+                console.log(error);
+            }
+    )};
 
 this.logout = function(){
 $http({
@@ -113,17 +113,20 @@ $http({
 })
 };
 
-$http({
-  method:'GET',
-  url:'/session'
-}).then(function(response){
-  // console.log(response);
-  if(response.data.username){
-  controller.loggedInUser = response.data
-  }
-});
+    $http({
+        method:'GET',
+        url:'/session'
+    }).then(function(response) {
+        // console.log(response);
+        if (response.data.username) {
+            controller.loggedInUser = response.data
+        }
+    });
 
+    this.wonderSelect = () => {
+        this.wonder = wonder;
+    };
 
-this.getWonder();
+    document.querySelector('[ng-class]');
 
 }]);
