@@ -100,18 +100,18 @@ app.controller('MyController',['$http', function($http){
             }
     )};
 
-this.logout = function(){
-$http({
-    url:'/session',
-    method:'DELETE'
-}).then(function(){
-    controller.loggedInUser = false;
-    controller.loginUsername = null;
-    controller.loginPassword = null;
-    // controller.signupPassword =null;
+    this.logout = function(){
+        $http({
+            url:'/session',
+            method:'DELETE'
+        }).then(function(){
+            controller.loggedInUser = false;
+            controller.loginUsername = null;
+            controller.loginPassword = null;
+            // controller.signupPassword =null;
 
-})
-};
+        })
+    };
 
     $http({
         method:'GET',
