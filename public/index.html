@@ -4,7 +4,25 @@
   <meta charset="utf-8">
   <title></title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" charset="utf-8"defer></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
+  <script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
+	</script>
+	<script>
+		function initMap() {
+			let map = new google.maps.Map(document.getElementById('map'),
+			{zoom: 16, disableDefaultUI: true, center: {lat: 29.9792, lng: 31.1342}});
+			var panorama = new google.maps.StreetViewPanorama(
+				document.getElementById('streetview-map'), {
+				position: { lat:29.9792, lng: 31.1342},
+				pov: {
+					heading: 180,
+					pitch: 20
+				}
+			});
+			map.setStreetView(panorama);
+		}
+	</script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
   <script src="/js/app.js" charset="utf-8"defer></script>
   <script async defer
           src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
@@ -55,23 +73,27 @@
     </div>
   <h1>World Wonders</h1>
 
-  <h3>Sign Up</h3>
-  <form>
-    Username: <input type="text" /><br/>
-    Password: <input type="password" /><br/>
-    <input type="submit"value="Sign Up">
-  </form><br>
+  <section ng-if="ctrl.loggedInUser === false">
 
+          <h2>Sign Up</h2>
+          <form ng-submit="ctrl.signup()">
+             Username: <input type="text" ng-model="ctrl.signupUsername"/><br/>
+             Password: <input type="password" ng-model="ctrl.signupPassword"/><br/>
+             <input type="submit" value="Sign Up">
+          </form>
 
-  <h3>Log In</h3>
-  <form>
-    Username: <input type="text">
-    Password: <input type="password">
-    <input type="submit" value="Login">
-  </form><br>
+          <h2>Log In</h2>
+           <form ng-submit="ctrl.login()">
+               Username: <input type="text" ng-model="ctrl.loginUsername"/><br/>
+               Password: <input type="password" ng-model="ctrl.loginPassword"/><br/>
+               <input type="submit" value="Log In">
+           </form>
 
-  <section>
-    <h2>Welcome!!</h2>
+  </section>
+
+  <section ng-if="ctrl.loggedInUser !== false">
+    <h2>Welcome{{ctrl.loggedInUser.username}}</h2>
+      <button ng-click="ctrl.logout()">Log Out</button>
 
 
 
