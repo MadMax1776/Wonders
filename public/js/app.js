@@ -52,7 +52,16 @@ app.controller('MyController',['$http', function($http){
     this.moveMap = function(wonder) {
         map.panTo({lat: wonder.latitude, lng: wonder.longitude});
         panorama.setPosition({lat: wonder.latitude, lng: wonder.longitude})
+        let moveMapsDiv = document.getElementById('wonderDetails').getBoundingClientRect();
+        console.log(moveMapsDiv);
+        let maps = document.getElementById('maps-div');
+        maps.style.left = 0;
+        maps.style.top = moveMapsDiv.y + moveMapsDiv.height;
     };
+
+    this.hideMap = function() {
+        document.getElementById('maps-div').style.left = "-1000px";
+    }
 
     this.createWonder = function() {
         $http({
