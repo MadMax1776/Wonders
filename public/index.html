@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" charset="utf-8"defer></script>
   <script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
 	</script>
@@ -23,51 +23,92 @@
 		}
 	</script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css" integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg==" crossorigin="anonymous">
-  <script src="/js/app.js" charset="utf-8"></script>
+  <script src="/js/app.js" charset="utf-8"defer></script>
+  <script async defer
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
+  </script>
+  <script defer>
+    function initMap() {
+      window.map = new google.maps.Map(document.getElementById('map'),
+              {zoom: 16, disableDefaultUI: true, center: {lat: 29.9792, lng: 31.1342}});
+      window.panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('streetview-map'), {
+          position: { lat:29.9792, lng: 31.1342},
+          pov: {
+            heading: 180,
+            pitch: 20
+          }
+        }
+      );
+    map.setStreetView(panorama);
+  }
+  </script>
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body ng-controller="MyController as ctrl">
+  <form ng-submit="ctrl.createWonder()">
+    Name: <input type="text" ng-model="ctrl.createForm.name" placeholder="Name"/>
+    Country: <input type="text" ng-model="ctrl.createForm.country" placeholder="Country"/>
+    Latitude: <input type="number" step="0.0001" ng-model="ctrl.createForm.latitude" placeholder="Latitude"/>
+    Longitude: <input type="number" step="0.0001" ng-model="ctrl.createForm.longitude" placeholder="Longitude"/>
+    <input type="submit" value="Create Wonder Entry">
+  </form>
+  <ul ng-repeat="wonder in ctrl.wonders">
+    <li ng-mouseover="ctrl.moveMap(wonder)">
+      {{wonder.name}}
+      {{wonder.country}}
+      {{wonder.latitude}}
+      {{wonder.longitude}}
+    </li>
+  </ul>
+    <div class="wonderDetails">
+      <h3>Name </h3>
+      {{ctrl.wonder.name}}
+      <h4>Country: </h4>
+      {{ctrl.wonder.country}}
+      <h4>Details: </h4>
+      {{ctrl.wonder.description}}
+      <div id="map"></div>
+      <div id="streetview-map"></div>
+    </div>
   <h1>World Wonders</h1>
-  {{2+2}}
 
-  <h3>Sign Up</h3>
-  <form>
-    Username: <input type="text" /><br/>
-    Password: <input type="password" /><br/>
-    <input type="submit"value="Sign Up">
-  </form><br>
+  <section ng-if="ctrl.loggedInUser === false">
+
+          <h2>Sign Up</h2>
+          <form ng-submit="ctrl.signup()">
+             Username: <input type="text" ng-model="ctrl.signupUsername"/><br/>
+             Password: <input type="password" ng-model="ctrl.signupPassword"/><br/>
+             <input type="submit" value="Sign Up">
+          </form>
+
+          <h2>Log In</h2>
+           <form ng-submit="ctrl.login()">
+               Username: <input type="text" ng-model="ctrl.loginUsername"/><br/>
+               Password: <input type="password" ng-model="ctrl.loginPassword"/><br/>
+               <input type="submit" value="Log In">
+           </form>
+
+  </section>
+
+  <section ng-if="ctrl.loggedInUser !== false">
+    <h2>Welcome{{ctrl.loggedInUser.username}}</h2>
+      <button ng-click="ctrl.logout()">Log Out</button>
 
 
-    <h3>Log In</h3>
-    <form>
-      Username: <input type="text">
-      Password: <input type="password">
-      <input type="submit"value="Login">
-    </form><br>
 
-    <section>
-      <h2>Welcome!!</h2>
-
-      <div>
-        <form ng-submit="ctrl.createWonder()">
-
-        Search: <input type="text" ng-model="ctrl.name" placeholder="Search Wonders">
-        <input type="submit" value="Search">
-        </form>
-      </div> <br>
-
-     <h3>Your list of Wonders</h3>
-      <div>
-          <ul>
-            <li ng-repeat="wwe in ctrl.wwe">
-              {{wwe.name}}
-              {{wwe.description}}
-              {{wwe.country}}
-              {{wwe.latitude}}
-              {{wwe.longitude}}
-            </li>
-          </ul>
-      </div>
+    <h3>Your list of Wonders</h3>
+    <div>
+        <ul>
+          <li ng-repeat="wonder in ctrl.wonders">
+            {{wonder.name}}
+            {{wonder.description}}
+            {{wonder.country}}
+            {{wonder.latitude}}
+            {{wonder.longitude}}
+          </li>
+        </ul>
+    </div>
   </section>
 </body>
 </html>
