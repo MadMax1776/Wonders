@@ -106,6 +106,21 @@
             {{wonder.country}}
             {{wonder.latitude}}
             {{wonder.longitude}}
+                  <!-- <a
+                      ng-if="$index !== ctrl.indexOfEditFormToShow"
+                      ng-click="ctrl.indexOfEditFormToShow = $index;"
+                      href="#"
+                      >
+                      Edit This Wonder
+                  </a>
+
+                  <form
+                  ng-if="$index === ctrl.indexOfEditFormToShow"
+                  ng-submit="ctrl.editWonder(wonder)">
+                      <input type="text" ng-model="ctrl.updatedDescription" placeholder="description"/>
+                      <input type="submit" value="Update Description">
+              </form> -->
+              <button ng-click="ctrl.deleteTodo(todo)">Delete This Wonder</button> 
           </li>
         </ul>
     </div>

@@ -11,6 +11,7 @@ app.controller('MyController',['$http', function($http){
     this.wonder = '';
 
     this.loggedInUser = false;
+    this.indexOfEditFormToShow = null;
     ////changing between true and false determines what will be on the page.
 
     const controller = this;
@@ -99,6 +100,20 @@ app.controller('MyController',['$http', function($http){
                 console.log(error);
             }
     )};
+
+    this.deleteWonder = function(wonder){
+      $http({
+          method:'DELETE',
+          url: '/wonder/' + wonder._id
+      }).then(
+          function(){
+              controller.getWonder();
+          },
+          function(error){
+
+          }
+      )
+  };
 
 this.logout = function(){
 $http({
