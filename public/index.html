@@ -51,7 +51,7 @@
     </section>
 
 <section ng-if="ctrl.loggedInUser !== false">
-  <h2>Welcome {{ctrl.loggedInUser.username}}!</h2>
+  <h2>Welcome {{ctrl.loggedInUser.username}}</h2>
   <button ng-click="ctrl.logout()">Log Out</button>
 
 
@@ -108,7 +108,7 @@
                       <input type="text" ng-model="ctrl.updatedDescription" placeholder="description"/>
                       <input type="submit" value="Update Description">
               </form> -->
-              <button ng-click="ctrl.deleteTodo(todo)">Delete This Wonder</button> 
+              <button ng-click="ctrl.deleteWonder(wonder)">Delete This Wonder</button>
           </li>
         </ul>
       </div>
