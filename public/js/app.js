@@ -102,7 +102,11 @@ app.controller('MyController',['$http', function($http){
         method:'PUT',
         url: '/wonder/' + wonder._id,
         data: {
-          name: this.updatedName
+          name: this.updatedName,
+          description: this.updatedDescription,
+          country: this.updatedCountry,
+          latitude: this.updatedLatitude,
+          longitude: this.updatedLongitude
           // title: this.updatedTitle || wonder.title
         }
       }).then(
