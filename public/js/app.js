@@ -28,6 +28,10 @@ app.controller('MyController',['$http', function($http){
         })
     };
 
+    this.closeForm = function() {
+        controller.indexOfEditFormToShow = null;
+    }
+
     this.login = function() {
         $http({
             url:'/session',
@@ -52,15 +56,12 @@ app.controller('MyController',['$http', function($http){
     this.moveMap = function(wonder) {
         map.panTo({lat: wonder.latitude, lng: wonder.longitude});
         panorama.setPosition({lat: wonder.latitude, lng: wonder.longitude})
-        let moveMapsDiv = document.getElementById('wonderDetails').getBoundingClientRect();
-        console.log(moveMapsDiv);
         let maps = document.getElementById('maps-div');
         maps.style.left = 0;
-        maps.style.top = moveMapsDiv.y + moveMapsDiv.height;
         controller.wonderSelect(wonder);
     };
 
-    this.hideMap = function() {
+    this.closeDetails = function() {
         document.getElementById('maps-div').style.left = "-1000px";
     }
 
@@ -71,7 +72,6 @@ app.controller('MyController',['$http', function($http){
             url:'/wonder/'
         }).then(
             (response) => {
-                console.log(response.data);
                 controller.wonders.push(response.data);
                 controller.createForm.name ='';
             },  (error) => console.log(error)
@@ -83,7 +83,6 @@ app.controller('MyController',['$http', function($http){
             url: '/wonder/'
         }).then(
             function(response){
-                console.log(response.data);
                 controller.wonders = response.data;
             },
                 function (error) {
@@ -93,7 +92,7 @@ app.controller('MyController',['$http', function($http){
     };
     this.getWonder();
 
-    this.editWonder = function() {
+    this.editWonder = function(wonder) {
         $http({
             method:'PUT',
             url: '/wonder/' + wonder._id,
@@ -146,14 +145,12 @@ app.controller('MyController',['$http', function($http){
         method:'GET',
         url:'/session'
     }).then(function(response) {
-        // console.log(response);
         if (response.data.username) {
             controller.loggedInUser = response.data
         }
     });
 
     this.wonderSelect = (wonder) => {
-        console.log(this);
         this.wonder = wonder;
     };
 

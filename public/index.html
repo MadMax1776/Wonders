@@ -68,42 +68,21 @@
 <section ng-if="ctrl.loggedInUser !== false">
   <h2 class="title is-2">Welcome {{ctrl.loggedInUser.username}}!</h2>
   <button ng-click="ctrl.logout()" class="button is-danger is-inverted">Log Out</button>
-  <div class="field is-horizontal box hero" width="600px">
-    <div class="field-body">
-      <form class="log" ng-submit="ctrl.createWonder()">
-        <div class="field">
-          Name: <input class="input" type="text" ng-model="ctrl.createForm.name" placeholder="Name"/><br>
-          Country: <input class="input" type="text" ng-model="ctrl.createForm.country" placeholder="Country"/><br>
-          Latitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.latitude"
-                           placeholder="Latitude"/><br>
-          Longitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.longitude"
-                            placeholder="Longitude"/><br>
-          <div class="buttons has-addons is-centered">
-            <button type="submit" class="button is-danger is-inverted">Create Wonder Entry</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
   <h3 class="title is-3">List of Wonders</h3>
-  <div class="is-size-3">
+  <div id="wonder-list" class="is-size-3">
     <ul>
-      <li ng-repeat="wonder in ctrl.wonders"
-          ng-click="ctrl.moveMap(wonder)">
-        {{wonder.name}}
-        {{wonder.description}}
-        {{wonder.country}}
-        {{wonder.latitude}}
-        {{wonder.longitude}}
-        <button ng-click="ctrl.deleteWonder(wonder)">Delete This Wonder</button>
-        <a
+      <li ng-repeat="wonder in ctrl.wonders">
+        <span ng-click="ctrl.moveMap(wonder)">
+              {{wonder.name}}</span> |
+        <button ng-click="ctrl.deleteWonder(wonder)">Delete This Wonder</button> |
+        <button
                 ng-if="$index !== ctrl.indexOfEditFormToShow"
                 ng-click="ctrl.indexOfEditFormToShow = $index;"
                 href="#"
         >
           Edit This Wonder
-        </a>
-        <form
+        </button>
+        <form   id="edit-form"
                 ng-if="$index === ctrl.indexOfEditFormToShow"
                 ng-submit="ctrl.editWonder(wonder)">
           Wonder Name:
@@ -117,21 +96,45 @@
           Wonder Longitude:
           <input type="text" ng-model="ctrl.updatedLongitude" placeholder="Longitude"/>
           <input type="submit" placeholder="Submit Edits"/>
+          <button ng-click="ctrl.closeForm()">Cancel Edit</button>
         </form>
       </li>
     </ul>
-    <div id="wonderDetails">
-      {{ctrl.wonder.name}}
-      {{ctrl.wonder.description}}
-      {{ctrl.wonder.country}}
-      {{ctrl.wonder.latitude}}
-      {{ctrl.wonder.longitude}}
+  </div>
+  <div class="field is-horizontal box hero" width="600px">
+    <div class="field-body">
+      <form class="log" ng-submit="ctrl.createWonder()">
+        <div class="field">
+          Name: <input class="input" type="text" ng-model="ctrl.createForm.name" placeholder="Name"/><br/>
+          Description: <input class="description" type="text" ng-model="ctrl.createForm.description" placeholder="Short Description"/><br/>
+          Country: <input class="input" type="text" ng-model="ctrl.createForm.country" placeholder="Country"/><br/>
+          Latitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.latitude"
+                           placeholder="Latitude"/><br/>
+          Longitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.longitude"
+                            placeholder="Longitude"/><br/>
+          <div class="buttons has-addons is-centered">
+            <button type="submit" class="button is-danger is-inverted">Create Wonder Entry</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 <div id="maps-div">
+  <div id="wonderDetails">
+    <strong>Name:</strong><br/>
+    {{ctrl.wonder.name}}<br/>
+    <strong>Description:</strong><br/>
+    {{ctrl.wonder.description}}<br/>
+    <strong>Country:</strong><br/>
+    {{ctrl.wonder.country}}<br/>
+    <strong>GPS Coordinates:</strong> <br/>
+    [Latitude: {{ctrl.wonder.latitude}}, Longitude:
+    {{ctrl.wonder.longitude}}]
+  </div>
   <div id="map"></div>
   <div id="streetview-map"></div>
+  <a href="#" ng-click="ctrl.closeDetails()">Close</a>
 </div>
 </body>
 </html>
