@@ -143,6 +143,34 @@
                     <input type="text" ng-model="ctrl.updatedName" placeholder="Name"/>
                     <input type="submit" value="Update Name">
             </form>
+
+            <form
+                ng-if="$index === ctrl.indexOfEditFormToShow"
+                ng-submit="ctrl.editWonder(wonder)">
+                    <input type="text" ng-model="ctrl.updatedDescription" placeholder="Description"/>
+                    <input type="submit" value="Update Description">
+            </form>
+
+            <form
+                ng-if="$index === ctrl.indexOfEditFormToShow"
+                ng-submit="ctrl.editWonder(wonder)">
+                    <input type="text" ng-model="ctrl.updatedCountry" placeholder="Country"/>
+                    <input type="submit" value="Update Country">
+            </form>
+
+            <form
+                ng-if="$index === ctrl.indexOfEditFormToShow"
+                ng-submit="ctrl.editWonder(wonder)">
+                    <input type="text" ng-model="ctrl.updatedLatitude" placeholder="Latitude"/>
+                    <input type="submit" value="Update Latitude">
+            </form>
+
+            <form
+                ng-if="$index === ctrl.indexOfEditFormToShow"
+                ng-submit="ctrl.editWonder(wonder)">
+                    <input type="text" ng-model="ctrl.updatedLongitude" placeholder="Longitude"/>
+                    <input type="submit" value="Update Longitude">
+            </form>
           </li>
         </ul>
   </div>
