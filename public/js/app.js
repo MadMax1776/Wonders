@@ -114,6 +114,20 @@ app.controller('MyController',['$http', function($http){
         }
       )};
 
+      this.deleteWonder = function(wonder){
+    $http({
+        method:'DELETE',
+        url: '/wonder/' + wonder._id
+    }).then(
+        function(){
+            controller.getWonder();
+        },
+        function(error){
+
+        }
+    )
+}
+
 
 
       $http({
