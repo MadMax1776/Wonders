@@ -5,137 +5,138 @@
   <title></title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js" charset="utf-8" defer></script>
   <script async defer
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZMcvDsdkxBtoQzfxSzgItGe_ePSPNaz4&callback=initMap">
   </script>
   <script>
-    function initMap() {
-      window.map = new google.maps.Map(document.getElementById('map'),
-              {zoom: 16, disableDefaultUI: true, center: {lat: 29.9792, lng: 31.1342}});
-      window.panorama = new google.maps.StreetViewPanorama(
-              document.getElementById('streetview-map'), {
-                position: {lat: 29.9792, lng: 31.1342},
-                pov: {
-                  heading: 180,
-                  pitch: 20
-                }
-              });
+  function initMap() {
+    window.map = new google.maps.Map(document.getElementById('map'),
+    {zoom: 16, disableDefaultUI: true, center: {lat: 29.9792, lng: 31.1342}});
+    window.panorama = new google.maps.StreetViewPanorama(
+      document.getElementById('streetview-map'), {
+        position: {lat: 29.9792, lng: 31.1342},
+        pov: {
+          heading: 180,
+          pitch: 20
+        }
+      });
       map.setStreetView(panorama);
     }
-  </script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
-        integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg=="
-        crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Fjalla+One&display=swap" rel="stylesheet">
-  <script src="/js/app.js" charset="utf-8" defer></script>
-  <link rel="stylesheet" href="/css/app.css">
-</head>
-<body ng-controller="MyController as ctrl">
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+    integrity="sha256-GSio8qamaXapM8Fq9JYdGNTvk/dgs+cMLgPeevOYEx0= sha384-wAweiGTn38CY2DSwAaEffed6iMeflc0FMiuptanbN4J+ib+342gKGpvYRWubPd/+ sha512-QHEb6jOC8SaGTmYmGU19u2FhIfeG+t/hSacIWPpDzOp5yygnthL3JwnilM7LM1dOAbJv62R+/FICfsrKUqv4Gg=="
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Fjalla+One&display=swap" rel="stylesheet">
+    <script src="/js/app.js" charset="utf-8" defer></script>
+    <link rel="stylesheet" href="/css/app.css">
+  </head>
+  <body ng-controller="MyController as ctrl">
 
-<section class="section" ng-if="ctrl.loggedInUser === false">
-  <h1 class="title is-1">World Wonders</h1>
-  <h2 class="title is-2">Sign Up</h2>
-  <div class="field is-horizontal box hero" width="600px">
-    <div class="field-body">
-      <form class="log" ng-submit="ctrl.signup()">
-        <div class="field">
-          Username: <input class="input" type="text" ng-model="ctrl.signupUsername"/><br/>
-          Password: <input class="input" type="password" ng-model="ctrl.signupPassword"/><br/>
-          <div class="buttons has-addons is-centered">
-            <button class="button is-light" type="submit">Submit</button>
-          </div>
+    <section class="section" ng-if="ctrl.loggedInUser === false">
+      <h1 class="title is-1">World Wonders</h1>
+      <h2 class="title is-2">Sign Up</h2>
+      <div class="field is-horizontal box hero" width="600px">
+        <div class="field-body">
+          <form class="log" ng-submit="ctrl.signup()">
+            <div class="field">
+              Username: <input class="input" type="text" ng-model="ctrl.signupUsername"/><br/>
+              Password: <input class="input" type="password" ng-model="ctrl.signupPassword"/><br/>
+              <div class="buttons has-addons is-centered">
+                <button class="button is-light" type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
-  <h2 class="title is-2">Log In</h2>
-  <div class="field is-horizontal box hero" width="600px">
-    <div class="field-body">
-      <form class="log" ng-submit="ctrl.login()">
-        <div class="field">
-          Username: <input class="input" type="text" ng-model="ctrl.loginUsername">
-          Password: <input class="input" type="password" ng-model="ctrl.loginPassword">
-          <div class="buttons has-addons is-centered">
-            <button type="submit" class="button is-light">Login</button>
-          </div>
+      </div>
+      <h2 class="title is-2">Log In</h2>
+      <div class="field is-horizontal box hero" width="600px">
+        <div class="field-body">
+          <form class="log" ng-submit="ctrl.login()">
+            <div class="field">
+              Username: <input class="input" type="text" ng-model="ctrl.loginUsername">
+              Password: <input class="input" type="password" ng-model="ctrl.loginPassword">
+              <div class="buttons has-addons is-centered">
+                <button type="submit" class="button is-light">Login</button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
-  </div>
-</section>
-<section ng-if="ctrl.loggedInUser !== false">
-  <h1 class="title is-1">World Wonders</h1>
-  <h2 class="title is-2">Welcome {{ctrl.loggedInUser.username}}!</h2>
-  <button ng-click="ctrl.logout()" class="button is-danger is-inverted">Log Out</button>
-  <h3 class="title is-3">List of Wonders</h3>
-  <div id="wonder-list" class="is-size-3">
-    <ul>
-      <li ng-repeat="wonder in ctrl.wonders">
-        <span ng-click="ctrl.moveMap(wonder)">
+      </div>
+    </section>
+    
+    <section ng-if="ctrl.loggedInUser !== false">
+      <h1 class="title is-1">World Wonders</h1>
+      <h2 class="title is-2">Welcome {{ctrl.loggedInUser.username}}!</h2>
+      <button ng-click="ctrl.logout()" class="button is-danger is-inverted">Log Out</button>
+      <h3 class="title is-3">List of Wonders</h3>
+      <div id="wonder-list" class="is-size-3">
+        <ul>
+          <li ng-repeat="wonder in ctrl.wonders">
+            <span ng-click="ctrl.moveMap(wonder)">
               {{wonder.name}}</span> |
-        <button ng-click="ctrl.deleteWonder(wonder)">Delete This Wonder</button> |
-        <button
-                ng-if="$index !== ctrl.indexOfEditFormToShow"
-                ng-click="ctrl.indexOfEditFormToShow = $index;"
-                href="#"
-        >
-          Edit This Wonder
-        </button>
-        <form   id="edit-form"
-                ng-if="$index === ctrl.indexOfEditFormToShow"
-                ng-submit="ctrl.editWonder(wonder)">
-          Wonder Name:
-          <input type="text" ng-model="ctrl.updatedName" placeholder="Name"/>
-          Wonder Description:
-          <input type="text" ng-model="ctrl.updatedDescription" placeholder="Description"/>
-          Wonder's Country:
-          <input type="text" ng-model="ctrl.updatedCountry" placeholder="Country"/>
-          Wonder Latitude:
-          <input type="text" ng-model="ctrl.updatedLatitude" placeholder="Latitude"/>
-          Wonder Longitude:
-          <input type="text" ng-model="ctrl.updatedLongitude" placeholder="Longitude"/>
-          <input type="submit" placeholder="Submit Edits"/>
-          <button ng-click="ctrl.closeForm()">Cancel Edit</button>
-        </form>
-      </li>
-    </ul>
-  </div>
-  <div class="field is-horizontal box hero" width="600px">
-    <div class="field-body">
-      <form class="log" ng-submit="ctrl.createWonder()">
-        <div class="field">
-          Name: <input class="input" type="text" ng-model="ctrl.createForm.name" placeholder="Name"/><br/>
-          Description: <input class="description" type="text" ng-model="ctrl.createForm.description" placeholder="Short Description"/><br/>
-          Country: <input class="input" type="text" ng-model="ctrl.createForm.country" placeholder="Country"/><br/>
-          Latitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.latitude"
-                           placeholder="Latitude"/><br/>
-          Longitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.longitude"
-                            placeholder="Longitude"/><br/>
-          <div class="buttons has-addons is-centered">
-            <button type="submit" class="button is-danger is-inverted">Create Wonder Entry</button>
-          </div>
-        </div>
-      </form>
+              <button ng-click="ctrl.deleteWonder(wonder)">Delete This Wonder</button> |
+              <button
+              ng-if="$index !== ctrl.indexOfEditFormToShow"
+              ng-click="ctrl.indexOfEditFormToShow = $index;"
+              href="#"
+              >
+              Edit This Wonder
+            </button>
+            <form   id="edit-form"
+            ng-if="$index === ctrl.indexOfEditFormToShow"
+            ng-submit="ctrl.editWonder(wonder)">
+            Wonder Name:
+            <input type="text" ng-model="ctrl.updatedName" placeholder="Name"/>
+            Wonder Description:
+            <input type="text" ng-model="ctrl.updatedDescription" placeholder="Description"/>
+            Wonder's Country:
+            <input type="text" ng-model="ctrl.updatedCountry" placeholder="Country"/>
+            Wonder Latitude:
+            <input type="text" ng-model="ctrl.updatedLatitude" placeholder="Latitude"/>
+            Wonder Longitude:
+            <input type="text" ng-model="ctrl.updatedLongitude" placeholder="Longitude"/>
+            <input type="submit" placeholder="Submit Edits"/>
+            <button ng-click="ctrl.closeForm()">Cancel Edit</button>
+          </form>
+        </li>
+      </ul>
     </div>
+    <div class="field is-horizontal box hero" width="600px">
+      <div class="field-body">
+        <form class="log" ng-submit="ctrl.createWonder()">
+          <div class="field">
+            Name: <input class="input" type="text" ng-model="ctrl.createForm.name" placeholder="Name"/><br/>
+            Description: <input class="description" type="text" ng-model="ctrl.createForm.description" placeholder="Short Description"/><br/>
+            Country: <input class="input" type="text" ng-model="ctrl.createForm.country" placeholder="Country"/><br/>
+            Latitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.latitude"
+            placeholder="Latitude"/><br/>
+            Longitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.longitude"
+            placeholder="Longitude"/><br/>
+            <div class="buttons has-addons is-centered">
+              <button type="submit" class="button is-danger is-inverted">Create Wonder Entry</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div id="maps-div">
+    <div id="wonderDetails">
+      <strong>Name:</strong><br/>
+      {{ctrl.wonder.name}}<br/>
+      <strong>Description:</strong><br/>
+      {{ctrl.wonder.description}}<br/>
+      <strong>Country:</strong><br/>
+      {{ctrl.wonder.country}}<br/>
+      <strong>GPS Coordinates:</strong> <br/>
+      [Latitude: {{ctrl.wonder.latitude}}, Longitude:
+      {{ctrl.wonder.longitude}}]
+    </div>
+    <div id="map"></div>
+    <div id="streetview-map"></div>
+    <a href="#" ng-click="ctrl.closeDetails()">Close</a>
   </div>
-</section>
-<div id="maps-div">
-  <div id="wonderDetails">
-    <strong>Name:</strong><br/>
-    {{ctrl.wonder.name}}<br/>
-    <strong>Description:</strong><br/>
-    {{ctrl.wonder.description}}<br/>
-    <strong>Country:</strong><br/>
-    {{ctrl.wonder.country}}<br/>
-    <strong>GPS Coordinates:</strong> <br/>
-    [Latitude: {{ctrl.wonder.latitude}}, Longitude:
-    {{ctrl.wonder.longitude}}]
-  </div>
-  <div id="map"></div>
-  <div id="streetview-map"></div>
-  <a href="#" ng-click="ctrl.closeDetails()">Close</a>
-</div>
 </body>
 </html>
