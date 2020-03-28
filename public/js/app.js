@@ -57,6 +57,7 @@ app.controller('MyController',['$http', function($http){
         let maps = document.getElementById('maps-div');
         maps.style.left = 0;
         maps.style.top = moveMapsDiv.y + moveMapsDiv.height;
+        controller.wonderSelect(wonder);
     };
 
     this.hideMap = function() {
@@ -92,22 +93,41 @@ app.controller('MyController',['$http', function($http){
     };
     this.getWonder();
 
-    this.editWonder = function(wonder){
+    this.editWonder = function() {
         $http({
             method:'PUT',
             url: '/wonder/' + wonder._id,
             data: {
-                title: this.updatedTitle || wonder.title
+                name: this.updatedName || wonder.name,
+                description: this.updatedDescription || wonder.description,
+                country: this.updatedCountry || wonder.country,
+                latitude: this.updatedLatitude || wonder.latitude,
+                longitude: this.updatedLongitude || wonder.longitude
             }
         }).then(
             function(response){
-                controller.updatedTitle = null;
+                controller.updatedName = null;
                 controller.getWonder();
-        },
+            },
             function(error){
                 console.log(error);
             }
     )};
+
+
+      this.deleteWonder = function(wonder) {
+        $http({
+            method:'DELETE',
+            url: '/wonder/' + wonder._id
+        }).then(
+            function(){
+                controller.getWonder();
+            },
+            function(error){
+
+            }
+        )
+    }
 
     this.logout = function(){
         $http({
@@ -132,7 +152,8 @@ app.controller('MyController',['$http', function($http){
         }
     });
 
-    this.wonderSelect = () => {
+    this.wonderSelect = (wonder) => {
+        console.log(this);
         this.wonder = wonder;
     };
 

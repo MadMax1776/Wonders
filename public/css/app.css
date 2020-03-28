@@ -2,6 +2,17 @@
     text-align: center;
 }
 
+body {
+    background-image: url("https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: grayscale(50%);
+    font-family: 'Baloo 2', cursive;
+    color: white;
+}
+
+
 #map {
     display: inline-block;
     height: 300px;
@@ -16,18 +27,44 @@
 
 #maps-div {
     position: absolute;
-    left: -1000px;
+    left: -1200px;
     height:100%;
     width:100%;
     transition: left 2s; /* A friend gave me this idea by asking me, "Did you learn how to animate in CSS? The answer was 'yes'!" - Stephen */
-}
-
-form {
-    width: 25%;
 }
 
 #top {
     position: fixed; /* thank you W3 schools! - Stephen */
     background-color: white;
     padding: 0 20px 0 20px;
+}
+
+form{
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: gray;
+    text-align: center;
+}
+
+.box{
+    margin: auto;
+    width: 50%;
+    padding: 35px;
+}
+
+.input {
+    box-shadow: inset 0 0.0625em 0.125em ;
+    max-width: 100%;
+    width: 100%;
+}
+
+.title{
+  text-align: center;
+  color:white;
+  font-family: 'Fjalla One', sans-serif;
+}
+
+button {
+    margin: 10px;
 }
