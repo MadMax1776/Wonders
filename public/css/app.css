@@ -2,12 +2,8 @@
     text-align: center;
 }
 
-html { /*read it is possible to style the html element. never knew! -Stephen */
-    height: 100%;
-}
-
 body {
-    height: 100%;
+
     background-image: url("https://images.pexels.com/photos/697662/pexels-photo-697662.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
     background-position: center;
     background-repeat: repeat;

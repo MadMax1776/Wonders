@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body ng-controller="MyController as ctrl">
-<h1>World Wonders</h1>
+
 <section class="section" ng-if="ctrl.loggedInUser === false">
   <h1 class="title is-1">World Wonders</h1>
   <h2 class="title is-2">Sign Up</h2>
@@ -66,6 +66,7 @@
   </div>
 </section>
 <section ng-if="ctrl.loggedInUser !== false">
+  <h1 class="title is-1">World Wonders</h1>
   <h2 class="title is-2">Welcome {{ctrl.loggedInUser.username}}!</h2>
   <button ng-click="ctrl.logout()" class="button is-danger is-inverted">Log Out</button>
   <h3 class="title is-3">List of Wonders</h3>
