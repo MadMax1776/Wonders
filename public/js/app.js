@@ -102,11 +102,12 @@ app.controller('MyController',['$http', function($http){
         method:'PUT',
         url: '/wonder/' + wonder._id,
         data: {
-          title: this.updatedTitle || wonder.title
+          name: this.updatedName
+          // title: this.updatedTitle || wonder.title
         }
       }).then(
         function(response){
-          controller.updatedTitle = null;
+          controller.updatedName = null;
           controller.getWonder();
         },
         function(error){
