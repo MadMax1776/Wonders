@@ -49,6 +49,6 @@ db.on('open', () => {
   console.log('Connection made!');
 });
 
-app.listen(3002, () => {
+app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
 })
