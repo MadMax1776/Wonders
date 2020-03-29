@@ -84,6 +84,12 @@ form{
   font-family: 'Fjalla One', sans-serif;
 }
 
+li{
+  cursor: pointer;
+   background-color: rgba(128,128,128,.5);
+   width: auto;
+}
+
 button {
   margin: 10px;
 }

@@ -65,11 +65,11 @@
         </div>
       </div>
     </section>
-    
+
     <section ng-if="ctrl.loggedInUser !== false">
       <h1 class="title is-1">World Wonders</h1>
       <h2 class="title is-2">Welcome {{ctrl.loggedInUser.username}}!</h2>
-      <button ng-click="ctrl.logout()" class="button is-danger is-inverted">Log Out</button>
+      <button ng-click="ctrl.logout()" class="button is-light">Log Out</button>
       <h3 class="title is-3">List of Wonders</h3>
       <div id="wonder-list" class="is-size-3">
         <ul>
@@ -84,7 +84,7 @@
               >
               Edit This Wonder
             </button>
-            <form   id="edit-form"
+            <form id="edit-form"
             ng-if="$index === ctrl.indexOfEditFormToShow"
             ng-submit="ctrl.editWonder(wonder)">
             Wonder Name:
@@ -97,12 +97,13 @@
             <input type="text" ng-model="ctrl.updatedLatitude" placeholder="Latitude"/>
             Wonder Longitude:
             <input type="text" ng-model="ctrl.updatedLongitude" placeholder="Longitude"/>
-            <input type="submit" placeholder="Submit Edits"/>
-            <button ng-click="ctrl.closeForm()">Cancel Edit</button>
+            <button type="button" class="button is-light">Submit Edit</button>
+            <button ng-click="ctrl.closeForm()" class="button is-light">Cancel Edit</button>
           </form>
         </li>
       </ul>
     </div>
+
     <div class="field is-horizontal box hero" width="600px">
       <div class="field-body">
         <form class="log" ng-submit="ctrl.createWonder()">
@@ -115,7 +116,7 @@
             Longitude: <input class="input" type="number" step="0.0001" ng-model="ctrl.createForm.longitude"
             placeholder="Longitude"/><br/>
             <div class="buttons has-addons is-centered">
-              <button type="submit" class="button is-danger is-inverted">Create Wonder Entry</button>
+              <button type="submit" class="button is-light">Create Wonder Entry</button>
             </div>
           </div>
         </form>

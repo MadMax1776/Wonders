@@ -74,6 +74,10 @@ app.controller('MyController',['$http', function($http){
       (response) => {
         controller.wonders.push(response.data);
         controller.createForm.name ='';
+        controller.createForm.description= '';
+        controller.createForm.country = '';
+        controller.createForm.latitude = '';
+        controller.createForm.longitude = '';
       },  (error) => console.log(error)
     )};
 
@@ -90,7 +94,6 @@ app.controller('MyController',['$http', function($http){
         }
       )
     };
-    this.getWonder();
 
     this.editWonder = function(wonder) {
       $http({
@@ -157,5 +160,7 @@ app.controller('MyController',['$http', function($http){
       };
 
       document.querySelector('[ng-class]');
+
+      this.getWonder();
 
     }]);
