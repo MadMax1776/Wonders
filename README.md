@@ -1,6 +1,7 @@
 # Wonders
 Unit 3 Project
 
-Created a new one to fix problems with mongo and heroku databases and what not.
+Overall this project went very well for our team. We began our project with an overly hasty start. We got most of our app's basic funcitonality up and running before we set up the database which was a mistake and caused the biggest problem for our project. We spent the better part of an entire day trying to fix it. Originally, Max tried to do the datbase by himself but ran into trouble at the part which required the users to sync mongoDBs. It took a while for our team to realize that we had started our product out of order. We realized we had made a mistake when we were rereading the markdown for the project and got to #6 which states "To set up your shared database for deployment, please follow these notes. You will NEED to do this before starting anything else on your project." We then had to resetup our work on a new github once we got our database up and running. Our original github with roughly the first day's worth of commits is here: https://github.com/MadMax1776/Unit3Project .
+Once our team got the database up and running we started moving at excellent speed again. We were actually quite surprised at how quickly we completed MVP for this project. We are very proud of our google maps API and it's ability to utilize latitude and longitude coordinates. For our task tracking app we used github projects. For the "Include at least one of the following features:" we included authorization, google maps API, two models and related models. Once again, with the exception of us stumbling on the database setup our project went very well and we are quite proud of our work. 
 
 https://cryptic-island-96673.herokuapp.com/
